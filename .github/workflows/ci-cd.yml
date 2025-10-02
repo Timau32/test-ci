@@ -32,14 +32,14 @@ jobs:
             cd /home/temur/test-ci-dev
             
             # Останавливаем текущий контейнер если запущен
-            docker compose -f docker/docker-compose.dev.yml down || true
+            docker compose -p dev down || true
             
             # Обновляем код
             git fetch origin
             git reset --hard origin/develop
             
             # Собираем и запускаем новый контейнер
-            docker compose -f docker/docker-compose.dev.yml up --build -d
+            docker compose -p dev up --build -d
             
             # Очищаем неиспользуемые образы
             docker image prune -f
@@ -65,14 +65,14 @@ jobs:
             cd /home/temur/test-ci
             
             # Останавливаем текущий контейнер если запущен
-            docker compose -f docker/docker-compose.prod.yml down || true
+            docker compose -p prod down || true
             
             # Обновляем код
             git fetch origin
             git reset --hard origin/master
             
             # Собираем и запускаем новый контейнер
-            docker compose -f docker/docker-compose.prod.yml up --build -d
+            docker compose -p prod up --build -d
             
             # Очищаем неиспользуемые образы
             docker image prune -f
